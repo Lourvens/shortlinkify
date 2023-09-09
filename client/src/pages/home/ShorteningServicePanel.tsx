@@ -37,7 +37,7 @@ export default function ShorteningServicePanel() {
         <Button color="primary" variant="shadow" className="font-bold">
           Shorten now
         </Button>
-        <Divider className="my-8" />
+        <Divider className="my-5" />
         <Input
           type="text"
           labelPlacement="outside"
@@ -45,8 +45,8 @@ export default function ShorteningServicePanel() {
           placeholder="Add an access code"
           startContent={<HiLockClosed />}
         />
-        <Spacer y={8} />
-        <div className="flex items-end">
+        <Spacer y={4} />
+        <div className="flex items-end gap-3">
           <Input
             classNames={{
               base: "w-8/12 shrink-0",
@@ -54,7 +54,7 @@ export default function ShorteningServicePanel() {
             label="Expires in*"
             labelPlacement="outside"
             type="number"
-            defaultValue={"0"}
+            placeholder="expires in"
             startContent={<HiClock />}
           />
           <Select
@@ -63,9 +63,10 @@ export default function ShorteningServicePanel() {
               innerWrapper: "pt-0 capitalize",
             }}
             color="primary"
+            selectedKeys={[1]}
           >
-            {["mins", "hours", "days", "weeks"].map((v) => (
-              <SelectItem key={v} value={v}>
+            {["mins", "hours", "days", "weeks"].map((v, i) => (
+              <SelectItem key={v} value={i}>
                 {v}
               </SelectItem>
             ))}
