@@ -11,6 +11,8 @@ import {
 import { HiLockClosed, HiClock } from "react-icons/hi";
 
 export default function ShorteningServicePanel() {
+  const timeUnits = ["mins", "hours", "days", "weeks"];
+
   return (
     <Card
       classNames={{
@@ -63,11 +65,12 @@ export default function ShorteningServicePanel() {
               innerWrapper: "pt-0 capitalize",
             }}
             color="primary"
-            selectedKeys={[1]}
+            items={timeUnits}
+            defaultSelectedKeys={[timeUnits[1]]}
           >
-            {["mins", "hours", "days", "weeks"].map((v, i) => (
-              <SelectItem key={v} value={i}>
-                {v}
+            {timeUnits.map((unit) => (
+              <SelectItem key={unit} value={unit}>
+                {unit}
               </SelectItem>
             ))}
           </Select>
