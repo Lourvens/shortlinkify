@@ -28,7 +28,7 @@ export default function App() {
         </NavbarItem>
         <NavbarItem>
           <Link color="foreground" href="#">
-            pricings
+            Anlytics
           </Link>
         </NavbarItem>
       </NavbarContent>
