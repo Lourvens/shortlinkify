@@ -1,6 +1,12 @@
 import { Button, Input, Spacer } from "@nextui-org/react";
+import { useFormContext } from "../FormContext";
+import { useFormState } from "react-hook-form";
+import { BiLinkAlt } from "react-icons/bi";
 
 export default function MainInputFields({ isLoading }: Props) {
+  const { register, control } = useFormContext();
+  const { errors } = useFormState({ control });
+
   return (
     <>
       <h4 className="text-xl font-semibold leading-none text-default-600 mb-4">
@@ -8,15 +14,16 @@ export default function MainInputFields({ isLoading }: Props) {
       </h4>
 
       <Input
-        type="text"
         label="Paste your link here"
         labelPlacement="outside"
         placeholder="www.example.com/ressource?q=1"
-        startContent="https://"
+        startContent={<BiLinkAlt />}
         classNames={{
           label: "text-primary-500",
           base: "focus:border-primay-600",
         }}
+        errorMessage={errors.long_url?.message}
+        {...register("long_url")}
       />
       <Spacer y={2} />
       <Button

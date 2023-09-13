@@ -2,16 +2,17 @@ import axios from "axios";
 import { useMutation } from "react-query";
 
 const useCreateShortUrl = () => {
-  type urlOptions = { access_code?: string; expires_in?: number };
+  type urlOptions = {
+    long_url: string;
+    access_code?: string;
+    expires_in?: number;
+  };
 
   const mutation = useMutation({
-    mutationFn: async (url: string, options?: urlOptions) => {
-      const res = await axios.post("/api/ping", {
-        short_url: url,
-        ...options,
-      });
-      console.log(res.data);
-      return res;
+    mutationFn: async (urlData: urlOptions) => {
+      const res = await axios.post("/api/url", urlData);
+
+      return res.data;
     },
   });
 

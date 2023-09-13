@@ -2,26 +2,23 @@ import { Card, CardBody, Divider } from "@nextui-org/react";
 import MainInputFields from "./components/MainInputFields";
 import AdditionalInputFields from "./components/AdditionalInputFields";
 import useCreateShortUrl from "./hooks/useCreateShortUrl";
-import { useForm } from "react-hook-form";
+import { FormProvider, urlSchemaForm } from "./FormContext";
 
 export default function ShorteningServicePanel() {
-  const { createShortUrl, isLoading } = useCreateShortUrl();
-  const { handleSubmit } = useForm();
+  const { isLoading, createShortUrl } = useCreateShortUrl();
 
-  const submitForm = () => {
-    const url = "https://google.com";
-
-    createShortUrl(url);
+  const submitForm = (data: urlSchemaForm) => {
+    createShortUrl(data);
   };
 
   return (
     <Card classNames={{ base: "shrink-0 md:w-2/5" }}>
       <CardBody>
-        <form onSubmit={handleSubmit(submitForm)}>
+        <FormProvider onSubmit={submitForm}>
           <MainInputFields isLoading={isLoading} />
           <Divider className="my-5" />
           <AdditionalInputFields />
-        </form>
+        </FormProvider>
       </CardBody>
     </Card>
   );
