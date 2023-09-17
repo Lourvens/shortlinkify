@@ -2,12 +2,13 @@ import { Card, CardBody, Divider } from "@nextui-org/react";
 import MainInputFields from "./components/MainInputFields";
 import AdditionalInputFields from "./components/AdditionalInputFields";
 import useCreateShortUrl from "./hooks/useCreateShortUrl";
-import { FormProvider, urlSchemaForm } from "./FormContext";
+import { UrlSchemaForm } from "./hooks/formContext";
+import { FormProvider } from "./components/FormProvider";
 
 export default function ShorteningServicePanel() {
   const { isLoading, createShortUrl } = useCreateShortUrl();
 
-  const submitForm = (data: urlSchemaForm) => {
+  const submitForm = (data: UrlSchemaForm) => {
     createShortUrl(data);
   };
 

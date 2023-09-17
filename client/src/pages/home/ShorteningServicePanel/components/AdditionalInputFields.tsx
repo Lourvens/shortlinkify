@@ -1,7 +1,7 @@
 import { Input, Spacer } from "@nextui-org/react";
 import { HiLockClosed } from "react-icons/hi";
 import ExpiresInputBox from "./ExpiresInputBox";
-import { useFormContext } from "../FormContext";
+import { useFormContext } from "../hooks/formContext";
 import { useFormState } from "react-hook-form";
 
 export default function AdditionalInputFields() {
