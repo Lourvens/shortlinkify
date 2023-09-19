@@ -22,8 +22,8 @@ export default function MainInputFields({ isLoading }: Props) {
           label: "text-primary-500",
           base: "focus:border-primay-600",
         }}
-        errorMessage={errors.long_url?.message}
-        {...register("long_url")}
+        errorMessage={errors.url?.message}
+        {...register("url")}
       />
       <Spacer y={2} />
       <Button

@@ -27,7 +27,7 @@ const ExpiresInputBox = () => {
           break;
       }
     }
-    setValue("expiresIn", value);
+    setValue("expiresIn", value > 0 ? value : undefined);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTimeUnit, timeValue]);
 
