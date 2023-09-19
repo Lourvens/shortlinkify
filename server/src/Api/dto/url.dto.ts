@@ -9,15 +9,13 @@ import {
 } from 'class-validator';
 
 export class CreateShortUrlDto {
-  @IsUrl({ require_valid_protocol: true, require_protocol: true })
+  @IsUrl({ require_valid_protocol: true })
   url: string;
-
-  private _expiresInMinutes?: number;
 
   @Type(() => Number)
   @IsNumber({}, { message: 'expiresIn must be a number in minutes' })
   @Min(5, { message: 'expiresIn must be at least 5 minutes' })
-  @Transform(({ value }) => value * 60 * 1000) //Convert into milliseconds
+  @Transform(({ value }) => value * 60 * 1000) //Convert minutes into milliseconds
   @IsOptional()
   expiresIn: number;
 
