@@ -1,0 +1,22 @@
+FROM node:18-alpine
+
+WORKDIR /usr/app
+
+ENV PORT 3000
+
+ENV NODE_ENV development
+
+COPY package.json yarn.lock ./
+
+RUN yarn install 
+
+# set up prisma client
+COPY prisma .
+RUN yarn global add prisma && \
+    prisma generate
+
+COPY . .
+
+CMD [ "yarn", "start:dev" ]
+
+EXPOSE 3000
