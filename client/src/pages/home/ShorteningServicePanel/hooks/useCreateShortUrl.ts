@@ -2,6 +2,7 @@ import axios from "axios";
 import { useMutation } from "react-query";
 import _ from "lodash";
 import { useLinkModal } from "../../../../context/LinkModalContext";
+import { generateShortURL } from "../../../../utils/generateShortURL";
 
 const useCreateShortUrl = () => {
   const { openModal } = useLinkModal();
@@ -19,7 +20,7 @@ const useCreateShortUrl = () => {
 
       openModal({
         original_url: urlData.url,
-        short_url: res.data.hash,
+        short_url: generateShortURL(res.data.hash),
       });
 
       return res.data;
