@@ -5,15 +5,13 @@ services:
       context: ./client
       dockerfile: Dockerfile.dev
     ports:
-      - "80:5173"
+      - "8000:5173"
     environment:
-      - SERVER_URL=http://api-server
-      - VITE_CLIENT_URL=http://localhost
+      - BACKEND_API=http://api-server:3000
+      - VITE_CLIENT_HOST_URL=http://localhost:8000
     volumes:
       - ./client:/usr/app
-      - /usr/app/node_modules
       - /usr/app/.git
-    entrypoint: /bin/sh
     networks:
       - frontend
     depends_on:
@@ -28,11 +26,11 @@ services:
       - ./server:/usr/app
       - /usr/app/node_modules
       - /usr/app/.git
-    env_file:
-      - ./server/.env.dev
     environment:
-      - DATABASE_URL=postgresql://root:1234@db:5432
+      - DATABASE_URL=postgresql://root:1234@db:5432/root
       - REDIS_URL=redis://cache:6379
+      - ACCESS_TOKEN_KEY=48b6e9e7c0498676d23dfe6a4435b667
+      - ACCESS_TOKEN_EXPIRES_IN="1d"
     networks:
       - backend
       - frontend
@@ -47,6 +45,7 @@ services:
     networks:
       - backend
     volumes:
+      - ./server/prisma/schema.sql:/docker-entrypoint-initdb.d/init.sql
       - db:/var/lib/postgresql/data
   cache:
     image: redis
