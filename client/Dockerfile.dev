@@ -10,6 +10,6 @@ RUN yarn install
 
 COPY . .
 
-CMD [ "yarn", "dev" ]
+CMD [ "yarn", "dev",  "--host" ]
 
-EXPOSE 5173 
+EXPOSE 5173

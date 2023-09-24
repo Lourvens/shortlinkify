@@ -5,25 +5,28 @@ services:
       context: ./client
       dockerfile: Dockerfile.dev
     ports:
-      - 3000:5173
+      - "80:5173"
     environment:
-      - BACKEND_URL=http://api-server
+      - SERVER_URL=http://api-server
+      - VITE_CLIENT_URL=http://localhost
     volumes:
       - ./client:/usr/app
       - /usr/app/node_modules
       - /usr/app/.git
+    entrypoint: /bin/sh
     networks:
       - frontend
+    depends_on:
+      - api-server
   api-server:
     build:
       context: ./server
       dockerfile: Dockerfile.dev
     ports:
-      - 3001:3000
+      - "3000:3000"
     volumes:
       - ./server:/usr/app
       - /usr/app/node_modules
-      - /usr/app/dist
       - /usr/app/.git
     env_file:
       - ./server/.env.dev
