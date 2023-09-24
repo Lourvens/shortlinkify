@@ -1,12 +1,10 @@
-DROP TABLE IF EXISTS users, links, link_click_history;
-
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(255) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE links (
+CREATE TABLE IF NOT EXISTS links (
   id BIGSERIAL PRIMARY KEY,
   hash VARCHAR(10) UNIQUE NOT NULL,
   original_url VARCHAR(2048) NOT NULL,
@@ -17,7 +15,7 @@ CREATE TABLE links (
   user_id INTEGER REFERENCES users(id)
 );
 
-CREATE TABLE link_click_history (
+CREATE TABLE IF NOT EXISTS link_click_history (
   id BIGSERIAL PRIMARY KEY,
   link_id BIGINT  REFERENCES links(id) NOT NULL,
   visited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -25,5 +23,5 @@ CREATE TABLE link_click_history (
   ip_address VARCHAR(30)
 );
 
-CREATE INDEX idx_link_user_id ON links(user_id);
-CREATE INDEX idx_link_click_history_link_id ON link_click_history(link_id);
+CREATE INDEX IF NOT EXISTS idx_link_user_id ON links(user_id);
+CREATE INDEX IF NOT EXISTS idx_link_click_history_link_id ON link_click_history(link_id);
