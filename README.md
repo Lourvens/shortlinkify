@@ -8,7 +8,8 @@ Welcome to the URL Shortener web application repository! This full-stack web app
 - **Database**: PostgreSQL
 - **Client**: React
 - **Language**: TypeScript
-
+- **Tools**: Docker
+  
 ## Features
 
 1. **Shorten Long URLs**: Create a short link for any long URL. The creator of the short link can customize it with extra parameters, such as an expiration date and an access code.
